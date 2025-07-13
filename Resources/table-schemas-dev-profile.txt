@@ -60,7 +60,10 @@ mysql> describe customer;
 | is_fee_paid     | bit(1)       | YES  |     | NULL    |       |
 | membership_date | date         | YES  |     | NULL    |       |
 | name            | varchar(255) | NO   |     | NULL    |       |
+| acccount_status | bit(1)       | YES  |     | NULL    |       |
 +-----------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
 7 rows in set (0.00 sec)
 
 mysql> describe issued_book;

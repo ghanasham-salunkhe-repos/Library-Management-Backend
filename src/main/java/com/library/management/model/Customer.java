@@ -53,4 +53,6 @@ public class Customer {
 
     // not enforcing not null as we will create it accordingly
     private Boolean isFeePaid = false;
+
+    private Boolean acccountStatus;
 }

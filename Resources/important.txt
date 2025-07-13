@@ -1,0 +1,8 @@
+Correct. In Spring Boot, if you use @RequestMapping("/api/blahblah") at the class level
+and @GetMapping("/blah/") at the method level, the endpoint will match /api/blahblah/blah/
+but not /api/blahblah/blah (without the trailing slash).
+
+To make the endpoint accessible with or without the trailing slash, use @GetMapping("/blah")
+ (no trailing slash) or just @GetMapping("blah").
+ Spring will then match both /api/blahblah/blah and /api/blahblah/blah/.
+
