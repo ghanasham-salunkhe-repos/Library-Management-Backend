@@ -1,0 +1,10 @@
+#basic spring information
+spring:
+  application:
+    name: library-management-application
+  profiles:
+    active: dev
+
+#setup server port
+server:
+  port: 8080

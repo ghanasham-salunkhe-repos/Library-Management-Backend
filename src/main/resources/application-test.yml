@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username : test_user
+    password : 171225
+    driver-class-name : com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true   # Enables automatic restart (default: true)
+    livereload:
+      enabled: true   # Enables LiveReload server (default: true)
+  jpa:
+    database-platform : org.hibernate.dialect.MySQLDialect
+    generate-ddl : true
+    hibernate.ddl-auto : update

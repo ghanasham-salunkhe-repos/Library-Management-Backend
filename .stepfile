@@ -1,0 +1,76 @@
+here inside this file i will document whatever i did until now
+
+1) create project with spring initializer with all needed dependencies
+
+2) now creating different dbs for different profile with different credentials
+
+queries:
+    CREATE DATABASE IF NOT EXISTS test;
+    CREATE DATABASE IF NOT EXISTS production;
+    CREATE DATABASE IF NOT EXISTS development;
+
+    -- Create user for test database
+    CREATE USER 'test_user'@'%' IDENTIFIED BY '171225';
+    GRANT ALL PRIVILEGES ON test.* TO 'test_user'@'%';
+    FLUSH PRIVILEGES;
+
+    -- Create user for production database
+    CREATE USER 'prod_user'@'%' IDENTIFIED BY '171225';
+    GRANT ALL PRIVILEGES ON production.* TO 'prod_user'@'%';
+    FLUSH PRIVILEGES;
+
+    -- Create user for development database
+    CREATE USER 'dev_user'@'%' IDENTIFIED BY '171225';
+    GRANT ALL PRIVILEGES ON development.* TO 'dev_user'@'%';
+    FLUSH PRIVILEGES;
+
+3) create and test different profile for test production and development
+
+4) create model in base package and write all table entities inside that with specifications as below
+
+    A. Customer
+
+        Long id
+        String name
+        String email
+        String phone
+        LocalDate membershipDate
+        Boolean isFeePaid
+
+    B. Book :
+
+        Long id
+        String title
+        String author
+        int totalCopies
+        int availableCopies
+        List<Review> reviews (OneToMany)
+
+    C. IssuedBook :
+
+        Long id
+        Book book (ManyToOne)
+        Customer customer (ManyToOne)
+        LocalDate issueDate
+        LocalDate dueDate
+        LocalDate returnDate
+        Boolean isReturned
+        Double fineAmount
+
+    D. Review :
+
+        Long id
+        Book book (ManyToOne)
+        Customer customer (ManyToOne)
+        String content
+        int rating (1–5)
+
+    E.Payment :
+
+        Long id
+        Customer customer (ManyToOne)
+        LocalDate paymentDate
+        Double amount
+        Boolean isSuccessful
+
+5) if you want to provide some generated values, you need to alter that table accordingly inside mysql db
