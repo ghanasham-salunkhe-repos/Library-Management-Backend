@@ -1,0 +1,80 @@
+mysql> use development;
+mysql> show tables;
++-----------------------+
+| Tables_in_development |
++-----------------------+
+| book                  |
+| customer              |
+| customer_seq          |
+| issued_book           |
+| payment               |
+| review                |
++-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> describe book;
++------------------+--------------+------+-----+---------+----------------+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| id               | bigint       | NO   | PRI | NULL    | auto_increment |
+| author           | varchar(255) | NO   |     | NULL    |                |
+| available_copies | int          | NO   |     | NULL    |                |
+| title            | varchar(255) | NO   |     | NULL    |                |
+| total_copies     | int          | NO   |     | NULL    |                |
++------------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> describe review;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | bigint       | NO   | PRI | NULL    | auto_increment |
+| comment     | varchar(255) | YES  |     | NULL    |                |
+| rating      | int          | NO   |     | NULL    |                |
+| book_id     | bigint       | YES  | MUL | NULL    |                |
+| customer_id | bigint       | YES  | MUL | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> describe payment;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | bigint       | NO   | PRI | NULL    | auto_increment |
+| amount        | double       | NO   |     | NULL    |                |
+| is_successful | bit(1)       | NO   |     | NULL    |                |
+| payment_date  | date         | NO   |     | NULL    |                |
+| payment_id    | varchar(255) | NO   |     | NULL    |                |
+| customer_id   | bigint       | YES  | MUL | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> describe customer;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| id              | bigint       | NO   | PRI | NULL    |       |
+| birth_date      | date         | NO   |     | NULL    |       |
+| contact_number  | varchar(255) | NO   |     | NULL    |       |
+| email           | varchar(255) | NO   |     | NULL    |       |
+| is_fee_paid     | bit(1)       | YES  |     | NULL    |       |
+| membership_date | date         | YES  |     | NULL    |       |
+| name            | varchar(255) | NO   |     | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> describe issued_book;
++-------------+--------+------+-----+---------+----------------+
+| Field       | Type   | Null | Key | Default | Extra          |
++-------------+--------+------+-----+---------+----------------+
+| id          | bigint | NO   | PRI | NULL    | auto_increment |
+| due_date    | date   | NO   |     | NULL    |                |
+| fine_amount | double | YES  |     | NULL    |                |
+| is_returned | bit(1) | YES  |     | NULL    |                |
+| issued_date | date   | NO   |     | NULL    |                |
+| return_date | date   | YES  |     | NULL    |                |
+| book_id     | bigint | YES  | MUL | NULL    |                |
+| customer_id | bigint | YES  | MUL | NULL    |                |
++-------------+--------+------+-----+---------+----------------+
+8 rows in set (0.00 sec)
+

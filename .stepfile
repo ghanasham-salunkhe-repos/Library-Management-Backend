@@ -74,3 +74,9 @@ queries:
         Boolean isSuccessful
 
 5) if you want to provide some generated values, you need to alter that table accordingly inside mysql db
+
+6) Once you have table ready now you need to create repository interfaces to interact with the tables
+
+7) Once you create repository interface, we dont store any business logic in repo so create service and its implementation
+
+8) Now create the controller and use service interface to interact with database, repository should not be accessed directly from controller

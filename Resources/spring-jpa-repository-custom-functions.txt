@@ -1,0 +1,160 @@
+Spring Data JPA repository method naming conventions allow you to define query methods in your repository interfaces without writing the actual query. Spring parses the method name and generates the query at runtime. Here’s a complete guide:
+
+---
+
+### 1. **Basic Structure**
+
+A repository interface extends `JpaRepository`:
+
+```java
+    public interface UserRepository extends JpaRepository<User, Long> {
+        // Custom query methods go here
+    }
+```
+
+---
+
+### 2. **Method Prefixes**
+
+- `findBy`, `readBy`, `getBy`: Retrieve data.
+- `countBy`: Count records.
+- `existsBy`: Check existence.
+- `deleteBy`, `removeBy`: Delete records.
+
+---
+
+### 3. **Field Names**
+
+- Use the exact field names from your entity.
+- For nested properties, use underscores or camel case (e.g., `findByAddress_City` or `findByAddressCity`).
+
+---
+
+### 4. **Query Keywords**
+
+- `And`, `Or`: Combine conditions.
+- `Between`, `LessThan`, `GreaterThan`, `After`, `Before`: Range queries.
+- `IsNull`, `IsNotNull`: Null checks.
+- `Like`, `NotLike`, `StartingWith`, `EndingWith`, `Containing`: Pattern matching.
+- `In`, `NotIn`: Collections.
+- `OrderBy`: Sorting.
+
+---
+
+### 5. **Return Types**
+
+- `List<T>`, `Optional<T>`, `Page<T>`, `Slice<T>`, or single entity.
+
+---
+
+### 6. **Examples**
+
+```java
+    // Find by single field
+    Optional<User> findByEmail(String email);
+
+    // Find by multiple fields
+    List<User> findByFirstNameAndLastName(String firstName, String lastName);
+
+    // Find by field with OR
+    List<User> findByStatusOrRole(String status, String role);
+
+    // Find by range
+    List<User> findByAgeBetween(int min, int max);
+
+    // Find by comparison
+    List<User> findByAgeGreaterThan(int age);
+    List<User> findByAgeLessThanEqual(int age);
+
+    // Find by null check
+    List<User> findByLastLoginIsNull();
+    List<User> findByLastLoginIsNotNull();
+
+    // Find by pattern
+    List<User> findByFirstNameLike(String pattern);
+    List<User> findByFirstNameStartingWith(String prefix);
+    List<User> findByFirstNameEndingWith(String suffix);
+    List<User> findByFirstNameContaining(String infix);
+
+    // Find by collection
+    List<User> findByIdIn(List<Long> ids);
+    List<User> findByRoleNotIn(List<String> roles);
+
+    // Count and existence
+    long countByStatus(String status);
+    boolean existsByEmail(String email);
+
+    // Delete
+    void deleteByStatus(String status);
+
+    // Sorting and pagination
+    List<User> findByStatusOrderByCreatedAtDesc(String status);
+    Page<User> findByRole(String role, Pageable pageable);
+
+    // Nested property
+    List<User> findByAddress_City(String city);
+```
+
+---
+
+### 7. **Special Cases**
+
+- **Distinct**: `findDistinctByStatus(String status)`
+- **Top/First**: `findTop3ByOrderByCreatedAtDesc()`, `findFirstByEmail(String email)`
+
+---
+
+### 8. **Custom Queries**
+
+If the method name is too complex, use `@Query`:
+
+```java
+    @Query("SELECT u FROM User u WHERE u.email = :email AND u.status = :status")
+    Optional<User> findByEmailAndStatus(@Param("email") String email, @Param("status") String status);
+```
+
+---
+
+### 9. **Summary Table**
+
+| Keyword         | Example Method Name                        | Description                        |
+|-----------------|-------------------------------------------|------------------------------------|
+| And/Or          | findByEmailAndStatus                      | Combines conditions                |
+| Between         | findByAgeBetween                          | Range (inclusive)                  |
+| LessThan        | findByAgeLessThan                         | Less than                          |
+| GreaterThan     | findByAgeGreaterThan                      | Greater than                       |
+| IsNull          | findByLastLoginIsNull                     | Null check                         |
+| Like            | findByFirstNameLike                       | SQL LIKE pattern                   |
+| In              | findByIdIn                                | In a collection                    |
+| OrderBy         | findByStatusOrderByCreatedAtDesc          | Sorting                            |
+| Top/First       | findTop1ByOrderByCreatedAtDesc            | Limit results                      |
+| Distinct        | findDistinctByStatus                      | Distinct results                   |
+
+---
+
+### 10. **Best Practices**
+
+- Use clear, descriptive method names.
+- Don’t overcomplicate—if the method name is too long, use `@Query`.
+- Always match field names exactly (case-sensitive).
+- Use DTOs or projections for partial data if needed.
+
+---
+
+**Example Repository:**
+
+```java
+    public interface UserRepository extends JpaRepository<User, Long> {
+        Optional<User> findByEmail(String email);
+        List<User> findByStatusAndRole(String status, String role);
+        List<User> findByAgeBetween(int min, int max);
+        List<User> findByFirstNameContaining(String infix);
+        long countByStatus(String status);
+        boolean existsByEmail(String email);
+        void deleteByStatus(String status);
+        List<User> findByAddress_City(String city);
+        List<User> findTop3ByOrderByCreatedAtDesc();
+    }
+```
+
+This approach covers all major naming conventions and use cases for Spring Data JPA repository methods.
