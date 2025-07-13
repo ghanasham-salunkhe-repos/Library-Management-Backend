@@ -1,0 +1,12 @@
+package com.library.management.controller;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Tag(name = "Customer Management", description = "Customer activity related endpoints")
+@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+
+}
