@@ -82,3 +82,5 @@ queries:
 8) Now create the controller and use service interface to interact with database, repository should not be accessed directly from controller
 
 9) once you done with basic skelton of project use sql script in resources to enrich data in SQL tables & you can start with building API endpoints
+
+10) also define some dtos which can help you for hiding server data

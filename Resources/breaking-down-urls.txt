@@ -1,0 +1,148 @@
+--- lets study the URL(Uniform Resource Locator) first
+
+URL : https://abc.com:443/users/123?abc=123&key=blahblah&name=ghansham#index
+
+lets break it down :
+
+   - https --> its protocol used
+   - abc.com --> host (website is hosted on this IP, we use some domain lookup to get IP address from hostname)
+   - 443 --> the port on that IP address the https port is open and serving that website
+   - users --> is path for some resource on that host
+   - 123 --> it called path variable, some value on path, you can have multiple path variable on single URL
+        |--> you can use requestParam annotation to get data from pathvariable in springboot
+   - ?abc=123&key=blahblah&name=ghansham
+        |--> query params are material after ? and before #(not neccesary that it will be there always)
+        |--> this block is called as query parameters
+        |--> this will always present in key value format
+        |--> query params are not mandatory while request params are
+        |--> you can use @RequestParams to get the data from url
+   - #index --> it came from html page it can serve as id for some structure in html
+        |--> dont be concerned about this at all
+
+
+-- How to handle query params & request param in spring boot
+
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    |   URL Part	    |    Accessed with     |	Annotation	| Example                       |
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    | Path Parameter	| From the URL path	   | @PathVariable	| /user/123 → 123 is path param |
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    | Query Parameter	| From the query part  | @RequestParam	| /user/123?key=abc → key=abc   |
+    +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    🔹 Path Parameter (resource identifier)
+
+    '''java'''
+
+        @GetMapping("/user/{id}")
+        public ResponseEntity<User> getUser(@PathVariable Long id) {
+            // Gets 123 from /user/123
+        }
+
+    '''java'''
+
+    🔹 Query Parameter (optional/filtering)
+
+    '''java'''
+
+        @GetMapping("/user/{id}")
+        public ResponseEntity<?> getUser(
+            @PathVariable Long id,
+            @RequestParam(required = false) String key
+        ) {
+            // Gets "abc" from ?key=abc
+        }
+
+    '''java'''
+
+
+-- Tips:
+
+    1) You can mix both annotations in the same method (very common).
+    2) Query params are optional by default; path params are not.
+    3) Let me know if you want to try examples with multiple filters, default values, or lists!
+
+
+# things to note while working with @RequestParam // accessing query parameters
+
+    1) by default requestParam data is required, if that query parameter didn't come it will throw exception
+        EX :
+        -- we not need to pass string value for query params, variable name will be search in query parameters
+        '''java'''
+
+            @GetMapping("/books")
+            public ResponseEntity<?> getBooks(@RequestParam String genre) {
+                     ...
+            }
+
+            Calling /books without ?genre=... will throw MissingServletRequestParameterException.
+
+        '''java'''
+
+        ✅ A. Use required = false when the parameter is optional: @RequestParam(required = false) String genre
+        ✅ B. Default Values, You can provide a fallback: @RequestParam(defaultValue = "java") String genre
+
+    2) Spring automatically converts to the type, if its not in expected format, i will throw exception
+        EX :
+        '''java''''
+            @RequestParam int limit   // ?limit=10 → int
+            @RequestParam boolean active // ?active=true
+        '''java'''
+        if you pass limit=abc ---> TypeMismatchException
+
+    3) you can also pass a list with query parameter, how?
+         EX:
+         -- by passing same key multiple times, we can create a list from query parameters
+         '''java'''
+            // url : /books?genre=java&genre=python
+            @RequestParam List<String> genre
+         '''java'''
+
+    4) URLs should be encoded. Special characters like &, =, ? must be properly handled.
+       EX :
+       -- spring boot is able to handle it automatically
+       // ?keyword=Head%20First%20Java
+       --> keyword = head first java --> %20 is space, spring is able to handle those encoding and decoding
+
+    5) it always good to validate the data received from query parameters, you can use inbuilt functions or function you can write
+
+    6) Query parameters are case sensitive so genre and Genre are different things
+
+    7) you can pass ABC-abc, ABC_abc, abcAbc --> good paractise is pass the key which you;re looking in @RequestParam block
+    EX:
+        -- this following example will cover all things
+       @RequestParam(name = "abc_abc", required = false, defaultValue = "abc") String value;
+
+
+# Best Practises while using path param
+    1) use knowns for param not some getby, fetchby
+    bad : /getUserById/123; good : /users/123
+
+    2) always validate the input
+
+    3) use singular id for single sour
+    ex : /books/456/reviews;  /users/123
+
+    4) always use appropiate datatype, example for big number use long not int
+
+    5) maintain same naming structure for pathvariables
+    ex:
+    -- URL : /users/{userId}
+    code :
+    '''java'''
+        @GetMapping("/users/{userId}")
+        public ResponseEntity<User> getUser(@PathVariable Long userId)
+    '''java'''
+    -- you can pass name explicitly in PathVariables like : @PathVariable(name='userId', description='documenting the data')
+        |--> not needed, variable name matching is fine enough
+
+    6) dont overuse path variable two values from path variables will suffice, no need to overload it
+
+    7) dont use query params right after path variable
+    bad : /api/customer/123?book=abc
+    good : /api/customer/123/book?abc=abc
+    |==> please follow above conventions
+
+
+Note : path variables & query param are directly viewed from hyperlink,
+please dont use secret and important data, use post query which provide higher security

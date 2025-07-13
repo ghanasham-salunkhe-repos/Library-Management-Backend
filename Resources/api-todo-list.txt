@@ -46,7 +46,7 @@
 | PaymentController   | POST   /api/payments                        | Record a fee payment                          | -->
 |                     | GET    /api/payments/customer/{id}          | All payments made by a customer               | -->
 |                     | GET    /api/payments/pending                | Customers with no payment this month          | -->
-|                     | GET    /api/payments/monthly?month=07&year=2025 | Payments for a specific month             | -->
+|                     | GET /api/payments/monthly?month=07&year=2025| Payments for a specific month                 | -->
 |                     | GET    /api/payments/stats                  | Monthly income, overdue, and totals           | -->
 +---------------------+---------------------------------------------+-----------------------------------------------+
 | ReportController    | GET    /api/reports/daily-summary           | Daily summary: issues, returns, fines         | -->
@@ -69,4 +69,4 @@
 
 additional :
 
-CustomerController : get all customers --> completed
+CustomerController : get all customers in CustomerInformationDTO--> completed
