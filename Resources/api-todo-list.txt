@@ -1,7 +1,7 @@
 +---------------------+---------------------------------------------+-----------------------------------------------+
 | Controller          | Endpoint                                    | Description                                   |
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| CustomerController  | POST   /api/customers                       | Register a new customer                       | --> ::TODO
+| CustomerController  | POST   /api/customers                       | Register a new customer                       | --> done
 |                     | GET    /api/customers/{id}                  | Fetch customer details                        | --> done
 |                     | PUT    /api/customers/{id}                  | Update customer info                          | --> TODO
 |                     | GET    /api/customers/{id}/books            | List all currently issued books               | --> TODO
@@ -11,8 +11,8 @@
 |                     | GET    /api/customers/defaulters            | Customers with pending fines or unpaid fees   | --> TODO
 |                     | POST   /api/customers/{id}/deactivate       | Temporarily deactivate a customer             | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| BookController      | GET    /api/books                           | Get all books with availability               | --> TODO
-|                     | GET    /api/books/{id}                      | Get book details by ID                        | --> TODO
+| BookController      | GET    /api/books                           | Get all books with availability               | --> done
+|                     | GET    /api/books/{id}                      | Get book details by ID                        | --> done
 |                     | POST   /api/books                           | Add a new book                                | --> TODO
 |                     | PUT    /api/books/{id}                      | Update book details                           | --> TODO
 |                     | DELETE /api/books/{id}                      | Delete a book (if not issued)                 | --> TODO

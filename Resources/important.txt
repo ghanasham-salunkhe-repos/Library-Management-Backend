@@ -6,3 +6,11 @@ To make the endpoint accessible with or without the trailing slash, use @GetMapp
  (no trailing slash) or just @GetMapping("blah").
  Spring will then match both /api/blahblah/blah and /api/blahblah/blah/.
 
+
+# important functions
+
+    1) @PathVariables() --> used to handle path parameters
+    2) @RequestParam(name='', required='', default='') --> to handle the query parameters
+    3) @RequestBody --> to get data from body of post request
+    4) @Valid --> normally used with @RequestBody to validate the input object received from post body
+             |--> if input is not valid it will directly send error 400 bad request & controller function will not invoke only

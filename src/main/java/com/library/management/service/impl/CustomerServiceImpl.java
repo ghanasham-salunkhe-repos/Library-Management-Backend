@@ -1,6 +1,7 @@
 package com.library.management.service.impl;
 
-import com.library.management.dto.CustomerInformationDTO;
+import com.library.management.dto.input.CustomerBasicInputDTO;
+import com.library.management.dto.outputs.CustomerInformationDTO;
 import com.library.management.exceptions.CustomerNotFoundException;
 import com.library.management.mapper.LibraryManagementMapper;
 import com.library.management.model.Customer;
@@ -22,13 +23,19 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    // create entry for customer
+    @Override
+    public void createNewCustomerEntr(CustomerBasicInputDTO customerBasicInputDTO) {
+        Customer customer=LibraryManagementMapper.customerFromCustomerBasicInputDTO(customerBasicInputDTO);
+        customerRepository.save(customer);
+    }
 
     // get All Customers dta
     @Override
     public List<CustomerInformationDTO> getAllCustomers() {
-        List<Customer> customers=customerRepository.findAll();
-        if(customers.isEmpty()) {
-            return  new ArrayList<>();
+        List<Customer> customers = customerRepository.findAll();
+        if (customers.isEmpty()) {
+            return new ArrayList<>();
         }
         return customers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList();
     }
@@ -36,9 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
     // get All Active customer details
     @Override
     public List<CustomerInformationDTO> getAllCustomerByAccountStatus(Boolean accountStatus) {
-        List<Customer> activeCustomers=customerRepository.findAllByAcccountStatus(accountStatus);
+        List<Customer> activeCustomers = customerRepository.findAllByAcccountStatus(accountStatus);
         if (activeCustomers.isEmpty()) {
-            return  new ArrayList<>();
+            return new ArrayList<>();
         }
         return activeCustomers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList();
     }
@@ -48,8 +55,8 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerInformationDTO getCustomerById(Long customerId) {
         return LibraryManagementMapper.customerToCustomerInformationDTO(
                 customerRepository.findById(customerId).orElseThrow(
-                    () -> new CustomerNotFoundException(customerId)
-            )
+                        () -> new CustomerNotFoundException(customerId)
+                )
         );
     }
 }

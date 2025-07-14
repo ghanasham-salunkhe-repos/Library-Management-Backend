@@ -1,10 +1,12 @@
 package com.library.management.service;
 
-import com.library.management.model.Book;
+import com.library.management.dto.outputs.BookInformationDTO;
 
 import java.util.List;
 
 public interface BookService {
 
-    List<Book> getBooKDetailsWithAvailability();
+    List<BookInformationDTO> getBooKDetailsWithAvailability();
+
+    BookInformationDTO getBookById(Long bookId);
 }

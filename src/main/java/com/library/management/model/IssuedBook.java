@@ -38,6 +38,6 @@ public class IssuedBook {
     private Boolean isReturned;
 
     @Min(0)
-    private Double fineAmount=0.0;
+    private Double fineAmount = 0.0;
 
 }

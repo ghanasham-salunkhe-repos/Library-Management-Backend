@@ -23,7 +23,7 @@ public class Book {
 
     @NotNull
     @NotEmpty
-    private  String author;
+    private String author;
 
     @NotNull
     private Integer totalCopies;
@@ -32,5 +32,5 @@ public class Book {
     private Integer availableCopies;
 
     @OneToMany(mappedBy = "book")
-    List<Review> reviews=new ArrayList<>();// one to many mappings
+    List<Review> reviews = new ArrayList<>();// one to many mappings
 }
