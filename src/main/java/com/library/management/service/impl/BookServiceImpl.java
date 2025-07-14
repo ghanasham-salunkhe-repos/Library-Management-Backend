@@ -8,7 +8,6 @@ import com.library.management.repositories.BookRepository;
 import com.library.management.service.BookService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,9 +22,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookInformationDTO> getBooKDetailsWithAvailability() {
         List<Book> books = bookRepository.findAll();
-        if (books.isEmpty()) {
-            return new ArrayList<>();
-        }
         return books.stream().map(LibraryManagementMapper::bookToBookInformationDTO).toList();
     }
 
@@ -34,7 +30,35 @@ public class BookServiceImpl implements BookService {
         // search data by id if not found throw exception
         return LibraryManagementMapper.bookToBookInformationDTO(
                 bookRepository.findById(bookId).orElseThrow(
-                    ()-> new BookNotFoundException(bookId)
+                        () -> new BookNotFoundException(bookId)
                 ));
     }
+
+    @Override
+    public List<BookInformationDTO> getOutOfStockBooks() {
+
+        return bookRepository.findAllByAvailableCopiesEquals(0)
+                .stream().map(LibraryManagementMapper::bookToBookInformationDTO).toList();
+    }
+
+    @Override
+    public List<BookInformationDTO> getAllAvailableBooks() {
+        return bookRepository.findALlByAvailableCopiesGreaterThan(0)
+                .stream().map(LibraryManagementMapper::bookToBookInformationDTO).toList();
+    }
+
+    @Override
+    public List<BookInformationDTO> getAllBooksOfRating(Integer rating) {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(LibraryManagementMapper::bookToBookInformationDTO)
+                .filter(dto -> Math.ceil(dto.getRating()) == rating).toList();
+    }
+
+    @Override
+    public List<BookInformationDTO> getAllBooksAboveRating(Integer rating) {
+        List<Book> books = bookRepository.findAll();
+        return books.stream().map(LibraryManagementMapper::bookToBookInformationDTO)
+                .filter(dto -> Math.ceil(dto.getRating()) >= rating).toList();
+    }
+
 }

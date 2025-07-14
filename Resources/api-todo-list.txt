@@ -3,11 +3,11 @@
 +---------------------+---------------------------------------------+-----------------------------------------------+
 | CustomerController  | POST   /api/customers                       | Register a new customer                       | --> done
 |                     | GET    /api/customers/{id}                  | Fetch customer details                        | --> done
-|                     | PUT    /api/customers/{id}                  | Update customer info                          | --> TODO
+|                     | PUT    /api/customers/{id}                  | Update customer info                          | --> working
 |                     | GET    /api/customers/{id}/books            | List all currently issued books               | --> TODO
 |                     | GET    /api/customers/{id}/history          | Complete borrowing history                    | --> TODO
 |                     | DELETE /api/customers/{id}                  | Delete a customer (if no active books)        | --> TODO
-|                     | GET    /api/customers/active                | All customers with active issued books        | --> TODO
+|                     | GET    /api/customers/active                | All customers with active issued books        | --> done
 |                     | GET    /api/customers/defaulters            | Customers with pending fines or unpaid fees   | --> TODO
 |                     | POST   /api/customers/{id}/deactivate       | Temporarily deactivate a customer             | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
@@ -16,13 +16,13 @@
 |                     | POST   /api/books                           | Add a new book                                | --> TODO
 |                     | PUT    /api/books/{id}                      | Update book details                           | --> TODO
 |                     | DELETE /api/books/{id}                      | Delete a book (if not issued)                 | --> TODO
-|                     | GET    /api/books/out-of-stock              | List books with 0 available copies            | --> TODO
+|                     | GET    /api/books/out-of-stock              | List books with 0 available copies            | --> done
 |                     | GET    /api/books/recommended               | Recommend books based on reviews              | --> TODO
-|                     | GET    /api/books/popular                   | Books with highest borrow count               | --> TODO
+|                     | GET    /api/books/popular                   | Books with highest borrow count               | --> TODO (need group by on isowned)
 |                     | PATCH  /api/books/{id}/adjust-stock         | Increase/decrease stock manually              | --> TODO
 +---------------------+-----------------------------------------+---------------------------------------------------+
 | IssueController     | POST   /api/issues                          | Issue a book to a customer                    | --> TODO
-|                     | GET    /api/issues/{id}                     | Get issue details                             | --> TODO
+|                     | GET    /api/issues/{id}                     | Get issue details                             | --> working (completed to get entries & )
 |                     | GET    /api/issues/active                   | Get all active issued books                   | --> TODO
 |                     | GET    /api/issues/overdue                  | Books not returned by due date                | --> TODO
 |                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | --> TODO

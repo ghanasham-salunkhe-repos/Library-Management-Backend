@@ -21,4 +21,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    // create entry if issue book id dont exist
+    @ExceptionHandler(IssueBookIdNotFound.class)
+    public ResponseEntity<String> handleIssueBookIdNotFoundException(IssueBookIdNotFound exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
 }

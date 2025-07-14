@@ -13,24 +13,19 @@ import java.util.List;
 public class Book {
 
 
+    @OneToMany(mappedBy = "book")
+    List<Review> reviews = new ArrayList<>();// one to many mappings
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotNull
     @NotEmpty
     private String title;
-
     @NotNull
     @NotEmpty
     private String author;
-
     @NotNull
     private Integer totalCopies;
-
     @NotNull
     private Integer availableCopies;
-
-    @OneToMany(mappedBy = "book")
-    List<Review> reviews = new ArrayList<>();// one to many mappings
 }

@@ -9,7 +9,6 @@ import com.library.management.repositories.CustomerRepository;
 import com.library.management.service.CustomerService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     // create entry for customer
     @Override
     public void createNewCustomerEntr(CustomerBasicInputDTO customerBasicInputDTO) {
-        Customer customer=LibraryManagementMapper.customerFromCustomerBasicInputDTO(customerBasicInputDTO);
+        Customer customer = LibraryManagementMapper.customerFromCustomerBasicInputDTO(customerBasicInputDTO);
         customerRepository.save(customer);
     }
 
@@ -34,9 +33,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerInformationDTO> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
-        if (customers.isEmpty()) {
-            return new ArrayList<>();
-        }
         return customers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList();
     }
 
@@ -44,9 +40,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<CustomerInformationDTO> getAllCustomerByAccountStatus(Boolean accountStatus) {
         List<Customer> activeCustomers = customerRepository.findAllByAcccountStatus(accountStatus);
-        if (activeCustomers.isEmpty()) {
-            return new ArrayList<>();
-        }
         return activeCustomers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList();
     }
 
