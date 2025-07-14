@@ -33,7 +33,8 @@ public class CustomerController {
     @GetMapping("")
     public ResponseEntity<List<CustomerInformationDTO>> getAllCustomers() {
         log.info("[GET][/api/customers/] Fetching all customers");
-        List<Customer> customers=customerService.getAllCustomers();
+        List<CustomerInformationDTO> customers=customerService.getAllCustomers();
+
         if (customers.isEmpty()) {
             log.info("[GET][/api/customers/] No customers found");
             return  ResponseEntity.ok(new ArrayList<>());
@@ -41,47 +42,36 @@ public class CustomerController {
 
         log.info("[GET][/api/customers/] Total number of customers : {}",customers.size());
         // instead of sending data from the table, its ideal to share data in DTO format
-        return ResponseEntity.ok(
-                customers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList()
-        );
+        return ResponseEntity.ok(customers);
     }
 
     // get all active customers
     @GetMapping("/active")
     public ResponseEntity<List<CustomerInformationDTO>> getAllActiveCustomers() {
+
         log.info("[GET][/api/customers/active/] Fetching for active customers");
-        List<Customer> activeCustomers=customerService.getAllCustomerByAccountStatus(true);
-        if (activeCustomers.isEmpty()) {
-            log.info("[GET][/api/customers/active] No active customers found");
-            return  ResponseEntity.ok(new ArrayList<>());
-        }
+        List<CustomerInformationDTO> activeCustomers=customerService.getAllCustomerByAccountStatus(true);
 
         log.info("[GET][/api/customers/active] Number of active customers : {}",activeCustomers.size());
         // instead of sending data from the table, its ideal to share data in DTO format
-        return ResponseEntity.ok(
-                activeCustomers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList()
-        );
+        return ResponseEntity.ok(activeCustomers);
     }
 
     // get all inactive customers
     @GetMapping("/inactive")
     public ResponseEntity<List<CustomerInformationDTO>> getAllInactiveCustomers() {
-        log.info("[GET][/api/customers/inactive/] Fetching for inactive customers");
-        List<Customer> inactiveCustomers=customerService.getAllCustomerByAccountStatus(false);
-        if (inactiveCustomers.isEmpty()) {
-            log.info("[GET][/api/customers/inactive/] No inactive customers found");
-            return ResponseEntity.ok(new ArrayList<>());
-        }
 
-        log.info("[GET][/api/customers/active/] Number of inactive customers : {}",inactiveCustomers.size());
+        log.info("[GET][/api/customers/inactive/] Fetching for inactive customers");
+        List<CustomerInformationDTO> activeCustomers=customerService.getAllCustomerByAccountStatus(false);
+
+        log.info("[GET][/api/customers/inactive] Number of inactive customers : {}",activeCustomers.size());
         // instead of sending data from the table, its ideal to share data in DTO format
-        return ResponseEntity.ok(
-                inactiveCustomers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList()
-        );
+        return ResponseEntity.ok(activeCustomers);
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long customerId) {
+    public ResponseEntity<CustomerInformationDTO> getCustomerById(@PathVariable Long customerId) {
+
         log.info("[GET][/api/customers/{customerId}] searching for {}",customerId);
         return ResponseEntity.ok(customerService.getCustomerById(customerId));
     }

@@ -1,11 +1,14 @@
 package com.library.management.service.impl;
 
+import com.library.management.dto.CustomerInformationDTO;
 import com.library.management.exceptions.CustomerNotFoundException;
+import com.library.management.mapper.LibraryManagementMapper;
 import com.library.management.model.Customer;
 import com.library.management.repositories.CustomerRepository;
 import com.library.management.service.CustomerService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,21 +25,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     // get All Customers dta
     @Override
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+    public List<CustomerInformationDTO> getAllCustomers() {
+        List<Customer> customers=customerRepository.findAll();
+        if(customers.isEmpty()) {
+            return  new ArrayList<>();
+        }
+        return customers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList();
     }
 
     // get All Active customer details
     @Override
-    public List<Customer> getAllCustomerByAccountStatus(Boolean accountStatus) {
-        return customerRepository.findAllByAcccountStatus(accountStatus);
+    public List<CustomerInformationDTO> getAllCustomerByAccountStatus(Boolean accountStatus) {
+        List<Customer> activeCustomers=customerRepository.findAllByAcccountStatus(accountStatus);
+        if (activeCustomers.isEmpty()) {
+            return  new ArrayList<>();
+        }
+        return activeCustomers.stream().map(LibraryManagementMapper::customerToCustomerInformationDTO).toList();
     }
 
 
     @Override
-    public Customer getCustomerById(Long customerId) {
-        return customerRepository.findById(customerId).orElseThrow(
-                () -> new CustomerNotFoundException(customerId)
+    public CustomerInformationDTO getCustomerById(Long customerId) {
+        return LibraryManagementMapper.customerToCustomerInformationDTO(
+                customerRepository.findById(customerId).orElseThrow(
+                    () -> new CustomerNotFoundException(customerId)
+            )
         );
     }
 }

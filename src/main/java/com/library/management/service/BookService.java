@@ -2,7 +2,9 @@ package com.library.management.service;
 
 import com.library.management.model.Book;
 
+import java.util.List;
+
 public interface BookService {
 
-    public void saveBook(Book book);
+    List<Book> getBooKDetailsWithAvailability();
 }

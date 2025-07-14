@@ -3,68 +3,68 @@
 +---------------------+---------------------------------------------+-----------------------------------------------+
 | CustomerController  | POST   /api/customers                       | Register a new customer                       | --> ::TODO
 |                     | GET    /api/customers/{id}                  | Fetch customer details                        | --> done
-|                     | PUT    /api/customers/{id}                  | Update customer info                          | -->
-|                     | GET    /api/customers/{id}/books            | List all currently issued books               | -->
-|                     | GET    /api/customers/{id}/history          | Complete borrowing history                    | -->
-|                     | DELETE /api/customers/{id}                  | Delete a customer (if no active books)        | -->
-|                     | GET    /api/customers/active                | All customers with active issued books        | -->
-|                     | GET    /api/customers/defaulters            | Customers with pending fines or unpaid fees   | -->
-|                     | POST   /api/customers/{id}/deactivate       | Temporarily deactivate a customer             | -->
+|                     | PUT    /api/customers/{id}                  | Update customer info                          | --> TODO
+|                     | GET    /api/customers/{id}/books            | List all currently issued books               | --> TODO
+|                     | GET    /api/customers/{id}/history          | Complete borrowing history                    | --> TODO
+|                     | DELETE /api/customers/{id}                  | Delete a customer (if no active books)        | --> TODO
+|                     | GET    /api/customers/active                | All customers with active issued books        | --> TODO
+|                     | GET    /api/customers/defaulters            | Customers with pending fines or unpaid fees   | --> TODO
+|                     | POST   /api/customers/{id}/deactivate       | Temporarily deactivate a customer             | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| BookController      | GET    /api/books                           | Get all books with availability               | -->
-|                     | GET    /api/books/{id}                      | Get book details by ID                        | -->
-|                     | POST   /api/books                           | Add a new book                                | -->
-|                     | PUT    /api/books/{id}                      | Update book details                           | -->
-|                     | DELETE /api/books/{id}                      | Delete a book (if not issued)                 | -->
-|                     | GET    /api/books/out-of-stock              | List books with 0 available copies            | -->
-|                     | GET    /api/books/recommended               | Recommend books based on reviews              | -->
-|                     | GET    /api/books/popular                   | Books with highest borrow count               | -->
-|                     | PATCH  /api/books/{id}/adjust-stock         | Increase/decrease stock manually              | -->
+| BookController      | GET    /api/books                           | Get all books with availability               | --> TODO
+|                     | GET    /api/books/{id}                      | Get book details by ID                        | --> TODO
+|                     | POST   /api/books                           | Add a new book                                | --> TODO
+|                     | PUT    /api/books/{id}                      | Update book details                           | --> TODO
+|                     | DELETE /api/books/{id}                      | Delete a book (if not issued)                 | --> TODO
+|                     | GET    /api/books/out-of-stock              | List books with 0 available copies            | --> TODO
+|                     | GET    /api/books/recommended               | Recommend books based on reviews              | --> TODO
+|                     | GET    /api/books/popular                   | Books with highest borrow count               | --> TODO
+|                     | PATCH  /api/books/{id}/adjust-stock         | Increase/decrease stock manually              | --> TODO
 +---------------------+-----------------------------------------+---------------------------------------------------+
-| IssueController     | POST   /api/issues                          | Issue a book to a customer                    | -->
-|                     | GET    /api/issues/{id}                     | Get issue details                             | -->
-|                     | GET    /api/issues/active                   | Get all active issued books                   | -->
-|                     | GET    /api/issues/overdue                  | Books not returned by due date                | -->
-|                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | -->
-|                     | POST   /api/issues/batch                    | Issue multiple books in one API               | -->
-|                     | POST   /api/issues/{id}/extend              | Extend due date of an issued book             | -->
-|                     | GET    /api/issues/fines/today              | List today's newly calculated fines           | -->
+| IssueController     | POST   /api/issues                          | Issue a book to a customer                    | --> TODO
+|                     | GET    /api/issues/{id}                     | Get issue details                             | --> TODO
+|                     | GET    /api/issues/active                   | Get all active issued books                   | --> TODO
+|                     | GET    /api/issues/overdue                  | Books not returned by due date                | --> TODO
+|                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | --> TODO
+|                     | POST   /api/issues/batch                    | Issue multiple books in one API               | --> TODO
+|                     | POST   /api/issues/{id}/extend              | Extend due date of an issued book             | --> TODO
+|                     | GET    /api/issues/fines/today              | List today's newly calculated fines           | --> TODO
 +---------------------+-----------------------------------------+---------------------------------------------------+
-| ReturnController    | PUT    /api/returns/{issueId}               | Return a book and calculate fine              | -->
-|                     | POST   /api/returns/bulk                    | Bulk return by customer or list of issue IDs  | -->
-|                     | GET    /api/returns/late                    | Returned books that incurred fine             | -->
-|                     | GET    /api/returns/today                   | Books returned today                          | -->
-|                     | GET    /api/returns/history/{customerId}    | Return history for a customer                 | -->
+| ReturnController    | PUT    /api/returns/{issueId}               | Return a book and calculate fine              | --> TODO
+|                     | POST   /api/returns/bulk                    | Bulk return by customer or list of issue IDs  | --> TODO
+|                     | GET    /api/returns/late                    | Returned books that incurred fine             | --> TODO
+|                     | GET    /api/returns/today                   | Books returned today                          | --> TODO
+|                     | GET    /api/returns/history/{customerId}    | Return history for a customer                 | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| ReviewController    | POST   /api/books/{bookId}/review           | Submit review for a book                      | -->
-|                     | GET    /api/books/{bookId}/reviews          | Get all reviews for a book                    | -->
-|                     | PUT    /api/reviews/{id}                    | Update a review                               | -->
-|                     | DELETE /api/reviews/{id}                    | Delete a review                               | -->
-|                     | GET    /api/reviews/customer/{customerId}   | Get all reviews by a customer                 | -->
-|                     | GET    /api/reviews/top                     | Top-rated books by average rating             | -->
+| ReviewController    | POST   /api/books/{bookId}/review           | Submit review for a book                      | --> TODO
+|                     | GET    /api/books/{bookId}/reviews          | Get all reviews for a book                    | --> TODO
+|                     | PUT    /api/reviews/{id}                    | Update a review                               | --> TODO
+|                     | DELETE /api/reviews/{id}                    | Delete a review                               | --> TODO
+|                     | GET    /api/reviews/customer/{customerId}   | Get all reviews by a customer                 | --> TODO
+|                     | GET    /api/reviews/top                     | Top-rated books by average rating             | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| PaymentController   | POST   /api/payments                        | Record a fee payment                          | -->
-|                     | GET    /api/payments/customer/{id}          | All payments made by a customer               | -->
-|                     | GET    /api/payments/pending                | Customers with no payment this month          | -->
-|                     | GET /api/payments/monthly?month=07&year=2025| Payments for a specific month                 | -->
-|                     | GET    /api/payments/stats                  | Monthly income, overdue, and totals           | -->
+| PaymentController   | POST   /api/payments                        | Record a fee payment                          | --> TODO
+|                     | GET    /api/payments/customer/{id}          | All payments made by a customer               | --> TODO
+|                     | GET    /api/payments/pending                | Customers with no payment this month          | --> TODO
+|                     | GET /api/payments/monthly?month=07&year=2025| Payments for a specific month                 | --> TODO
+|                     | GET    /api/payments/stats                  | Monthly income, overdue, and totals           | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| ReportController    | GET    /api/reports/daily-summary           | Daily summary: issues, returns, fines         | -->
-|                     | GET    /api/reports/monthly-activity        | Monthly issue/return/payment stats            | -->
-|                     | GET    /api/reports/book-usage/{bookId}     | Book usage stats: who issued when             | -->
-|                     | GET    /api/reports/defaulter-list          | List of customers with unpaid fines or returns| -->
-|                     | GET    /api/reports/system-usage            | Total books, users, active issues etc.        | -->
+| ReportController    | GET    /api/reports/daily-summary           | Daily summary: issues, returns, fines         | --> TODO
+|                     | GET    /api/reports/monthly-activity        | Monthly issue/return/payment stats            | --> TODO
+|                     | GET    /api/reports/book-usage/{bookId}     | Book usage stats: who issued when             | --> TODO
+|                     | GET    /api/reports/defaulter-list          | List of customers with unpaid fines or returns| --> TODO
+|                     | GET    /api/reports/system-usage            | Total books, users, active issues etc.        | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| SearchController    | GET    /api/search/books?query=...          | Search books by title, author, ISBN           | -->
-|                     | GET    /api/search/customers?query=...      | Search customers by name/email                | -->
-|                     | GET    /api/search/issues?bookId=...&customerId=... | Filter issues                         | -->
-|                     | GET    /api/search/reviews?rating=5         | Filter reviews                                | -->
+| SearchController    | GET    /api/search/books?query=...          | Search books by title, author, ISBN           | --> TODO
+|                     | GET    /api/search/customers?query=...      | Search customers by name/email                | --> TODO
+|                     | GET    /api/search/issues?bookId=...&customerId=... | Filter issues                         | --> TODO
+|                     | GET    /api/search/reviews?rating=5         | Filter reviews                                | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
-| SystemController    | GET    /api/system/status                   | Custom app status                             | -->
-|                     | GET    /api/system/version                  | App version and build time                    | -->
-|                     | GET    /api/system/health                   | Custom health metrics                         | -->
-|                     | POST   /api/system/seed                     | Seed test data                                | -->
-|                     | GET    /actuator/*                          | All Spring Boot actuator endpoints            | -->
+| SystemController    | GET    /api/system/status                   | Custom app status                             | --> TODO
+|                     | GET    /api/system/version                  | App version and build time                    | --> TODO
+|                     | GET    /api/system/health                   | Custom health metrics                         | --> TODO
+|                     | POST   /api/system/seed                     | Seed test data                                | --> TODO
+|                     | GET    /actuator/*                          | All Spring Boot actuator endpoints            | --> TODO
 +---------------------+---------------------------------------------+-----------------------------------------------+
 
 additional :
