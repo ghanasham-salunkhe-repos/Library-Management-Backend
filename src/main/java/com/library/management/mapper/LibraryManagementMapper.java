@@ -35,8 +35,10 @@ public class LibraryManagementMapper {
 
     // mappers for book entity
     public static BookInformationDTO bookToBookInformationDTO(Book book) {
-        Double rating = book.getReviews().stream().collect(Collectors.averagingDouble(Review::getRating));
-        return new BookInformationDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getAvailableCopies(), book.getTotalCopies(), rating);
+        double average = book.getReviews().stream()
+                .collect(Collectors.averagingDouble(Review::getRating));
+        average = Math.round(average * 100.0) / 100.0;
+        return new BookInformationDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getAvailableCopies(), book.getTotalCopies(), average);
     }
 
 

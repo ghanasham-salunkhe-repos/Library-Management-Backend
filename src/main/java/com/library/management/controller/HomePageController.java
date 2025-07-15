@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "Home Page Functionalities", description = "Homepage related endpoints")
 @RestController
-@RequestMapping(("/api/"))
+@RequestMapping(("/api"))
 public class HomePageController {
 
-    @GetMapping("/")
+    @GetMapping("")
     public String homePage() {
         return "<h1>Hello World</h1>";
     }

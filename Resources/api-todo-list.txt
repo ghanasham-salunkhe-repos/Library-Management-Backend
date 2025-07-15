@@ -22,10 +22,10 @@
 |                     | PATCH  /api/books/{id}/adjust-stock         | Increase/decrease stock manually              | --> TODO
 +---------------------+-----------------------------------------+---------------------------------------------------+
 | IssueController     | POST   /api/issues                          | Issue a book to a customer                    | --> TODO
-|                     | GET    /api/issues/{id}                     | Get issue details                             | --> working (completed to get entries & )
-|                     | GET    /api/issues/active                   | Get all active issued books                   | --> TODO
-|                     | GET    /api/issues/overdue                  | Books not returned by due date                | --> TODO
-|                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | --> TODO
+|                     | GET    /api/issues/{id}                     | Get issue details                             | --> done
+|                     | GET    /api/issues/active                   | Get all active issued books                   | --> done
+|                     | GET    /api/issues/overdue                  | Books not returned by due date                | --> done
+|                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | --> working
 |                     | POST   /api/issues/batch                    | Issue multiple books in one API               | --> TODO
 |                     | POST   /api/issues/{id}/extend              | Extend due date of an issued book             | --> TODO
 |                     | GET    /api/issues/fines/today              | List today's newly calculated fines           | --> TODO

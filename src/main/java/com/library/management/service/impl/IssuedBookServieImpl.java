@@ -7,6 +7,7 @@ import com.library.management.repositories.IssuedBookRepository;
 import com.library.management.service.IssuedBookService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -45,6 +46,24 @@ public class IssuedBookServieImpl implements IssuedBookService {
     @Override
     public List<IssuedBookInformationDTO> getReturnedIssuedBooksInformation() {
         return issuedBookRepository.findAllByIsReturned(true)
+                .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
+    }
+
+    @Override
+    public List<IssuedBookInformationDTO> getAllFinedIssuedBooksInformation() {
+        return issuedBookRepository.findAllByFineAmountGreaterThan(0.0)
+                .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
+    }
+
+    @Override
+    public List<IssuedBookInformationDTO> getAllOverdueIssuedBooksInformation(LocalDate dueDateAfter) {
+        return issuedBookRepository.findAllByDueDateBeforeAndIsReturned(dueDateAfter,false)
+                .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
+    }
+
+    @Override
+    public List<IssuedBookInformationDTO> getAllIssuedBooksForCustomer(Long customerId) {
+        return issuedBookRepository.findAllByCustomer_Id(customerId)
                 .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
     }
 
