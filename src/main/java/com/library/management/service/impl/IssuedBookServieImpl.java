@@ -57,13 +57,29 @@ public class IssuedBookServieImpl implements IssuedBookService {
 
     @Override
     public List<IssuedBookInformationDTO> getAllOverdueIssuedBooksInformation(LocalDate dueDateAfter) {
-        return issuedBookRepository.findAllByDueDateBeforeAndIsReturned(dueDateAfter,false)
+        return issuedBookRepository.findAllByDueDateBeforeAndIsReturned(dueDateAfter, false)
                 .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
     }
 
     @Override
     public List<IssuedBookInformationDTO> getAllIssuedBooksForCustomer(Long customerId) {
         return issuedBookRepository.findAllByCustomer_Id(customerId)
+                .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
+    }
+
+    @Override
+    public Double getFineOnFromPerticularUser(Long customerId) {
+        return issuedBookRepository.getTotalFineByUserId(customerId);
+    }
+
+    @Override
+    public Double getFineOnToPerticularDate(LocalDate fineDate) {
+        return issuedBookRepository.getTotalFinedCollectedOnDate(fineDate);
+    }
+
+    @Override
+    public List<IssuedBookInformationDTO> getIssuedBooksInformationByReturnDate(LocalDate returnDate) {
+        return issuedBookRepository.findAllByReturnDate(returnDate)
                 .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
     }
 

@@ -25,10 +25,10 @@
 |                     | GET    /api/issues/{id}                     | Get issue details                             | --> done
 |                     | GET    /api/issues/active                   | Get all active issued books                   | --> done
 |                     | GET    /api/issues/overdue                  | Books not returned by due date                | --> done
-|                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | --> working
+|                     | GET    /api/issues/customer/{customerId}    | All issues by a customer                      | --> done
 |                     | POST   /api/issues/batch                    | Issue multiple books in one API               | --> TODO
-|                     | POST   /api/issues/{id}/extend              | Extend due date of an issued book             | --> TODO
-|                     | GET    /api/issues/fines/today              | List today's newly calculated fines           | --> TODO
+|                     | POST   /api/issues/{id}/extend              | Extend due date of an issued book             | --> working
+|                     | GET    /api/issues/fines/today              | List today's newly calculated fines           | --> done
 +---------------------+-----------------------------------------+---------------------------------------------------+
 | ReturnController    | PUT    /api/returns/{issueId}               | Return a book and calculate fine              | --> TODO
 |                     | POST   /api/returns/bulk                    | Bulk return by customer or list of issue IDs  | --> TODO

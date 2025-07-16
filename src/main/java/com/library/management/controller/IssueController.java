@@ -25,22 +25,16 @@ public class IssueController {
         this.issuedBookService = issuedBookService;
     }
 
-    @GetMapping({"/all",""})
+    @GetMapping({"/all", ""})
     public ResponseEntity<List<IssuedBookInformationDTO>> getAllIssuedBooksInformation() {
         log.info("[GET][/api/issues/all] find all issued books details");
         return ResponseEntity.ok(issuedBookService.getAllIssuedBooksInformation());
     }
 
-    @GetMapping(path = {"/incomplete","/active"})
+    @GetMapping(path = {"/active"})
     ResponseEntity<List<IssuedBookInformationDTO>> getAllActiveIssuedBooksInformation() {
         log.info("[GET][/api/issues/active] find all active issued books details");
         return ResponseEntity.ok(issuedBookService.getNotReturnedIssuedBooksInformation());
-    }
-
-    @GetMapping("/completed")
-    ResponseEntity<List<IssuedBookInformationDTO>> getAllCompletedIssuedBooksInformation() {
-        log.info("[GET][/api/issues/completed] find all complete returns details");
-        return ResponseEntity.ok(issuedBookService.getReturnedIssuedBooksInformation());
     }
 
     @GetMapping("/{issuedBookId}")
@@ -49,11 +43,6 @@ public class IssueController {
         return ResponseEntity.ok(issuedBookService.getIssuedBooksInformationById(issuedBookId));
     }
 
-    @GetMapping("/fine-entries")
-    ResponseEntity<List<IssuedBookInformationDTO>> getIssuedBooksInformationById() {
-        log.info("[GET][/api/issues/fine] find all fined book issue details]");
-        return ResponseEntity.ok(issuedBookService.getAllFinedIssuedBooksInformation());
-    }
 
     @GetMapping("/overdue/{inputDate}")
     ResponseEntity<List<IssuedBookInformationDTO>> getAllOverdueIssuedBooksInformation(@PathVariable String inputDate) {
@@ -71,7 +60,8 @@ public class IssueController {
 
     @GetMapping("/customer/{customerId}")
     ResponseEntity<List<IssuedBookInformationDTO>> getAllIssuedBooksForCustomer(@PathVariable Long customerId) {
-        log.info("[GET][/api/issues/customer/customer/{}] finding all book issue information for {}", customerId,customerId);
+        log.info("[GET][/api/issues/customer/customer/{}] finding all book issue information for {}", customerId, customerId);
         return ResponseEntity.ok(issuedBookService.getAllIssuedBooksForCustomer(customerId));
     }
+
 }
