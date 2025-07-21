@@ -8,9 +8,10 @@
 		<version>3.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.library</groupId>
+	<groupId>com.library.management</groupId>
 	<artifactId>library-management</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
 	<name>library-management</name>
 	<description>Library Management System API</description>
 	<url/>
@@ -20,6 +21,11 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>library-model</module>
+		<module>library-service</module>
+		<module>library-web</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
