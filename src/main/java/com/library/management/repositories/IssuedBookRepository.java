@@ -28,4 +28,9 @@ public interface IssuedBookRepository extends JpaRepository<IssuedBook, Long> {
     Double getTotalFinedCollectedOnDate(LocalDate returnDate);
 
     List<IssuedBook> findAllByReturnDate(LocalDate returnDate);
+
+    List<IssuedBook> findAllByIsReturnedAndCustomer_Id(Boolean isReturned, Long customerId);
+
+    List<IssuedBook> findAllCustomerByIsReturned(Boolean isReturned);
+
 }

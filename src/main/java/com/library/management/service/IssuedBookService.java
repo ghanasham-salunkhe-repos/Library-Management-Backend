@@ -25,4 +25,6 @@ public interface IssuedBookService {
     Double getFineOnToPerticularDate(LocalDate fineDate);
 
     List<IssuedBookInformationDTO> getIssuedBooksInformationByReturnDate(LocalDate returnDate);
+
+    List<IssuedBookInformationDTO> getReturnedIssuedBooksInformationByCustomerId(Long customerId);
 }

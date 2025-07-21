@@ -83,4 +83,10 @@ public class IssuedBookServieImpl implements IssuedBookService {
                 .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
     }
 
+    @Override
+    public List<IssuedBookInformationDTO> getReturnedIssuedBooksInformationByCustomerId(Long customerId) {
+        return issuedBookRepository.findAllByIsReturnedAndCustomer_Id(true, customerId)
+                .stream().map(LibraryManagementMapper::issuedBookToissuedBookInformationDTO).toList();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.library.management.controller;
 
 import com.library.management.dto.input.CustomerBasicInputDTO;
 import com.library.management.dto.outputs.CustomerInformationDTO;
+import com.library.management.dto.outputs.IssuedBookInformationDTO;
 import com.library.management.service.CustomerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Slf4j
@@ -80,5 +82,26 @@ public class CustomerController {
         log.info("[GET][/api/customers/{customerId}] searching for {}", customerId);
         return ResponseEntity.ok(customerService.getCustomerById(customerId));
     }
+
+    // get information for all books issues
+    @GetMapping("/{customerId}/books")
+    ResponseEntity<List<IssuedBookInformationDTO>> getAllActiveIssuedBooksForCustomer(@PathVariable Long customerId) {
+        log.info("[GET][/api/customer/{}/books] finding all active book issue information for customer : {}", customerId, customerId);
+        return ResponseEntity.ok(customerService.getActiveIssuedBookInformationById(customerId));
+    }
+
+    // get information for all books issues
+    @GetMapping("/{customerId}/history")
+    ResponseEntity<List<IssuedBookInformationDTO>> getAllIssuedBooksHistoryForCustomer(@PathVariable Long customerId) {
+        log.info("[GET][/api/customer/{}/history] finding all book issue information for customer : {}", customerId, customerId);
+        return ResponseEntity.ok(customerService.getIssuedBooksByCustomerId(customerId));
+    }
+
+    @GetMapping("/activeBookings")
+    ResponseEntity<List<CustomerInformationDTO>> getCustomersWithActiveBooks() {
+        log.info("[GET][/api/customer/activeBookings/] Fetching all customers with active books]");
+        return ResponseEntity.of(Optional.ofNullable(customerService.getAllCustomersWithActiveIssuedBooks()));
+    }
+
 
 }

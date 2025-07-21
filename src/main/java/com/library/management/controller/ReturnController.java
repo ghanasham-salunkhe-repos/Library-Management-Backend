@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-@Tag(name = "Book Returns Management", description = "Endpoints related to book returns ")
+@Tag(name = "Returns Management", description = "Endpoints related to book returns ")
 @RestController
 @RequestMapping("/api/returns")
 @Slf4j
@@ -34,25 +34,31 @@ public class ReturnController {
 
     @GetMapping(path = {"/incomplete"})
     ResponseEntity<List<IssuedBookInformationDTO>> getAllActiveIssuedBooksInformation() {
-        log.info("[GET][/api/issues/active] find all active issued books details");
+        log.info("[GET][/api/returns/active] find all active issued books details");
         return ResponseEntity.ok(issuedBookService.getNotReturnedIssuedBooksInformation());
     }
 
     @GetMapping("/complete")
     ResponseEntity<List<IssuedBookInformationDTO>> getAllCompletedIssuedBooksInformation() {
-        log.info("[GET][/api/issues/completed] find all complete returns details");
+        log.info("[GET][/api/returns/completed] find all complete returns details");
         return ResponseEntity.ok(issuedBookService.getReturnedIssuedBooksInformation());
     }
 
     @GetMapping("/fine-entries/customerwise/{customerId}")
     ResponseEntity<Double> getFineOnFromPerticularDate(@PathVariable Long customerId) {
-        log.info("[GET][/api/issues/fine-entries/customerwise/{}] find fine on from date {}]", customerId, customerId);
+        log.info("[GET][/api/returns/fine-entries/customerwise/{}] find fine on from date {}]", customerId, customerId);
         return ResponseEntity.ok(issuedBookService.getFineOnFromPerticularUser(customerId));
+    }
+
+    @GetMapping("/history/{customerId}")
+    ResponseEntity<List<IssuedBookInformationDTO>> getAllReturnedBookInformationCustomerWise(@PathVariable Long customerId) {
+        log.info("[GET][/api/returns/history/{}] find fine on from date {}]", customerId, customerId);
+        return ResponseEntity.ok(issuedBookService.getReturnedIssuedBooksInformationByCustomerId(customerId));
     }
 
     @GetMapping("/fine-entries")
     ResponseEntity<List<IssuedBookInformationDTO>> getIssuedBooksInformationById() {
-        log.info("[GET][/api/issues/fine] find all fined book issue details]");
+        log.info("[GET][/api/returns/fine-entries] find all fined book issue details]");
         return ResponseEntity.ok(issuedBookService.getAllFinedIssuedBooksInformation());
     }
 }
