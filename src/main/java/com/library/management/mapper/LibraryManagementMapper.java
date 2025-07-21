@@ -1,13 +1,8 @@
 package com.library.management.mapper;
 
 import com.library.management.dto.input.CustomerBasicInputDTO;
-import com.library.management.dto.outputs.BookInformationDTO;
-import com.library.management.dto.outputs.CustomerInformationDTO;
-import com.library.management.dto.outputs.IssuedBookInformationDTO;
-import com.library.management.model.Book;
-import com.library.management.model.Customer;
-import com.library.management.model.IssuedBook;
-import com.library.management.model.Review;
+import com.library.management.dto.outputs.*;
+import com.library.management.model.*;
 import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
@@ -54,5 +49,15 @@ public class LibraryManagementMapper {
                 issuedBook.getIsReturned(),
                 issuedBook.getFineAmount()
         );
+    }
+
+    // mapper for review table
+    public static ReviewInformationDTO reviewToReviewInformationDTO(Review review) {
+        return new ReviewInformationDTO(review.getBook().getTitle(), review.getBook().getAuthor(), review.getCustomer(), review.getComment(), review.getRating());
+    }
+
+    // mapper for payment table
+    public static PaymentInformationDTO paymentToPaymentInformationDTO(Payment payment) {
+        return new PaymentInformationDTO(payment.getCustomer(), payment.getPaymentDate(), payment.getPaymentId(), payment.getAmount(), payment.getIsSuccessful());
     }
 }
