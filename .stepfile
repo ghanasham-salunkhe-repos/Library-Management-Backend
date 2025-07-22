@@ -84,3 +84,14 @@ queries:
 9) once you done with basic skelton of project use sql script in resources to enrich data in SQL tables & you can start with building API endpoints
 
 10) also define some dtos which can help you for hiding server data
+
+11) Implement different types of api
+
+12) Divide and create different modules for different type of code
+    - split code on :
+        1) service code : service & service implementation code
+        2) repository code : to store table repository interfaces
+        3) model : to store entities
+        4) web : to store controller
+
+    - Note : please maintain parent pom definitions in child pom & inject dependency accordingly
