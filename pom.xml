@@ -25,6 +25,7 @@
 		<module>library-model</module>
 		<module>library-service</module>
 		<module>library-web</module>
+		<module>library-repository</module>
 	</modules>
 	<scm>
 		<connection/>
