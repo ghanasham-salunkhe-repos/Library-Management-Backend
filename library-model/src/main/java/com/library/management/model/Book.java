@@ -1,6 +1,7 @@
 package com.library.management.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -24,6 +25,8 @@ public class Book {
     @NotNull
     @NotEmpty
     private String author;
+
+    @Min(0)
     @NotNull
     private Integer totalCopies;
     @NotNull
